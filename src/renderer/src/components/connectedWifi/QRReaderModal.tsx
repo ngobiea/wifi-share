@@ -20,7 +20,7 @@ const QRReaderModal = (): JSX.Element => {
       handler={handleOpen}
       className={` ${isDarkMode ? ' bg-gray-800 text-white' : ''}`}
     >
-      <CardHeader shadow={false} floated={false} className=''>
+      <CardHeader shadow={false} floated={false} className=' py-2'>
         <div
           style={{
             height: 'auto',

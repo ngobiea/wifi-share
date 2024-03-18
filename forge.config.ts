@@ -1,3 +1,4 @@
+import { join } from 'path';
 import type { ForgeConfig } from '@electron-forge/shared-types';
 import { MakerSquirrel } from '@electron-forge/maker-squirrel';
 import { MakerZIP } from '@electron-forge/maker-zip';
@@ -14,6 +15,21 @@ import { rendererConfig } from './webpack.renderer.config';
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
+    icon: join(__dirname, './resources/icon.ico'),
+    name: 'WiFi-Share',
+    executableName: 'WiFi-Share',
+    appBundleId: 'com.ngobiea.wifi-share',
+    appCategoryType: 'public.app-category.utilities',
+    win32metadata: {
+      CompanyName: 'Augustine Ngobie',
+      FileDescription: 'Share your WiFi with friends and family with ease',
+      OriginalFilename: 'WiFi-Share',
+      ProductName: 'WiFi Share',
+      InternalName: 'WiFi Share',
+    },
+    appVersion: '1.0.0',
+    appCopyright: 'Augustine Ngobie @2024',
+
   },
   rebuildConfig: {},
   makers: [
@@ -31,8 +47,6 @@ const config: ForgeConfig = {
       setupMsi: 'WiFi-Share-Setup.msi',
       version: '1.0.0',
       copyright: 'Augustine Ngobie',
-      signWithParams: '/a /tr http://timestamp.digicert.com',
-
     }),
     new MakerZIP({}, ['darwin']),
     new MakerRpm({}),

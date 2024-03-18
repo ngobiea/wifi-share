@@ -1,6 +1,6 @@
 import { app, dialog } from 'electron';
 import { toFile, type QRCodeToFileOptions } from 'qrcode';
-import { rename } from 'fs';
+import { rename, unlink } from 'fs';
 import {
   networkInterfaces,
   wifiConnections,
@@ -119,12 +119,11 @@ class WifiService {
     if (!window) {
       return;
     }
-
     toFile(
       data.ssid,
       [{ data: Buffer.from(qrData), mode: 'byte' }],
       options,
-      (error): void => {
+      async (error): Promise<void> => {
         if (error) {
           console.log(error);
           window.webContents.send(saveImage, {
@@ -133,38 +132,45 @@ class WifiService {
           } as IPCResponse);
           return;
         }
-
-        dialog
-          .showSaveDialog(dialogOption)
-          .then(({ filePath }) => {
-            if (filePath) {
-              rename(data.ssid, filePath, (err) => {
-                if (error) {
-                  console.log(err);
-                  window.webContents.send(saveImage, {
-                    status: 'error',
-                    message: failImageMessage,
-                  } as IPCResponse);
-                }
+        try {
+          const { canceled, filePath } = await dialog.showSaveDialog(
+            dialogOption
+          );
+          if (canceled) {
+            unlink(data.ssid, (err) => {
+              if (err) {
+                console.log(err);
+              }
+              window.webContents.send(saveImage, {
+                status: 'error',
+                message: 'Save operation canceled by user',
+              } as IPCResponse);
+            });
+            return;
+          }
+          if (filePath) {
+            rename(data.ssid, filePath, (err) => {
+              if (err) {
+                console.log(err);
+                window.webContents.send(saveImage, {
+                  status: 'error',
+                  message: failImageMessage,
+                } as IPCResponse);
+              } else {
                 window.webContents.send(saveImage, {
                   status: 'success',
                   message: 'QR code image saved successfully',
                 } as IPCResponse);
-              });
-            } else {
-              window.webContents.send(saveImage, {
-                status: 'error',
-                message: failImageMessage,
-              } as IPCResponse);
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-            window.webContents.send(saveImage, {
-              status: 'error',
-              message: failImageMessage,
-            } as IPCResponse);
-          });
+              }
+            });
+          }
+        } catch (error) {
+          console.log(error);
+          window.webContents.send(saveImage, {
+            status: 'error',
+            message: failImageMessage,
+          } as IPCResponse);
+        }
       }
     );
   }

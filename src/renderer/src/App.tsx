@@ -15,6 +15,7 @@ import { appStatus } from './utils/appStatus';
 import StoredWifi from './components/storedWifi/StoredWifi';
 import WifiDetail from './components/storedWifi/StoredWifDetail';
 import NavbarSimple from './components/app/AppNavbar';
+import Welcome from './components/app/Welcome';
 appStatus();
 
 function App(): JSX.Element {
@@ -56,6 +57,7 @@ function App(): JSX.Element {
       <ConnectDialog />
       <ScannedWifi />
       <WifiDetail />
+      <Welcome />
       <div className='p-4 xl:ml-72 relative'>
         <NavbarSimple />
         {content}

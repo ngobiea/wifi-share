@@ -13,6 +13,7 @@ function CodeForm(): JSX.Element {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<AppNetwork>();
   const { isDarkMode } = useAppSelector((state) => state.app);
   const [qrCode, setQRCode] = useState<AppNetwork | null>(null);
@@ -77,6 +78,19 @@ function CodeForm(): JSX.Element {
           <div className='flex justify-end'>
             {qrCode && (
               <Button
+                color='red'
+                className='w-36 mr-6'
+                onClick={() => {
+                  setQRCode(null);
+                  canvasRef.current?.getContext('2d')?.clearRect(0, 0, 300, 300);
+                  reset();
+                }}
+              >
+                Reset
+              </Button>
+            )}
+            {qrCode && (
+              <Button
                 color='blue-gray'
                 className='w-36 mr-6'
                 onClick={() => {
@@ -86,7 +100,9 @@ function CodeForm(): JSX.Element {
                 Save Image
               </Button>
             )}
-            <Button color='blue-gray' type='submit'>
+            <Button color='blue-gray' type='submit'
+            disabled={qrCode !== null}
+            >
               Create QR Code
             </Button>
           </div>

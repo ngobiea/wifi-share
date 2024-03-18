@@ -9,6 +9,8 @@ export interface ImageFileProps {
 }
 function OpenImage(): JSX.Element {
   const dispatch = useAppDispatch();
+  const [key, setKey] = useState(Date.now());
+
   const [imgSrc, setImgSrc] = useState<string | null>(null);
   const { scanStatus, isDarkMode } = useAppSelector((state) => state.app);
   const handleResetImage = (): void => {
@@ -17,6 +19,7 @@ function OpenImage(): JSX.Element {
   };
   const handleSetImgSrc = (src: string | null): void => {
     setImgSrc(src);
+    setKey(Date.now());
   };
 
   return (
@@ -25,8 +28,10 @@ function OpenImage(): JSX.Element {
         isDarkMode ? ' bg-gray-800 text-white' : ''
       }`}
     >
-      <CardHeader color='blue-gray' className='relative h-[13rem]'>
-        <ImageFile imgSrc={imgSrc} handleSetImgSrc={handleSetImgSrc} />
+      <CardHeader color='blue-gray' className='relative flex justify-center items-center py-1'>
+        <ImageFile imgSrc={imgSrc} handleSetImgSrc={handleSetImgSrc}
+        key={key}
+        />
       </CardHeader>
       <CardBody
         className={`px-10 h-[12rem] ${

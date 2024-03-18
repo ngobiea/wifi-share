@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { MdAddPhotoAlternate } from 'react-icons/md';
 import jsQR from 'jsqr';
 import { isImageFile } from './utils/imageFile';
@@ -59,6 +59,13 @@ const ImageFile = ({
       dispatch(setQRCode(''));
     }
   };
+  useEffect(() => { 
+    if (imgSrc) {
+      const img = new Image();
+      img.onload = (): void => handleImageLoad(img);
+      img.src = imgSrc;
+    }
+  }, [imgSrc]);
   return (
     <div className='flex w-full justify-center pt-1'>
       <div className='rounded-md relative h-48 border border-gray-100 bg-white shadow-md w-3/12 mb-3'>
