@@ -22,7 +22,7 @@ With WiFi Share, none of your data is shared with any server. All your data is s
 
 ## Installation
 
-To use WiFi Share, simply download the application from the [GitHub releases page](link-to-releases-page) and install it on your computer.
+To use WiFi Share, simply download the application from the [GitHub releases page](https://github.com/ngobiea/wifi-share/releases/tag/WiFi-Share-Beta-1.0.0-beta.1) and install it on your computer.
 
 ## Usage
 
@@ -32,11 +32,11 @@ To use WiFi Share, simply download the application from the [GitHub releases pag
 
 ## Support and Feedback
 
-If you encounter any issues or have any feedback, please feel free to [open an issue](link-to-issues-page) on GitHub.
+If you encounter any issues or have any feedback, please feel free to [open an issue](https://github.com/ngobiea/wifi-share/issues) on GitHub.
 
 ## License
 
-This project is licensed under the [MIT License](link-to-license-file).
+This project is licensed under the [MIT License](https://opensource.org/license/mit).
 
 ## Coming Soon
 
