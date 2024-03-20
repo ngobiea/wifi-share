@@ -1,6 +1,6 @@
 {
   "name": "wifi-share",
-  "productName": "WiFi-Share",
+  "productName": "WiFi-Share Beta",
   "version": "1.0.0-beta.1",
   "description": "My Electron application description",
   "main": ".webpack/main",

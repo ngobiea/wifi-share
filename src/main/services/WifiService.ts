@@ -13,6 +13,7 @@ import { join } from 'path';
 import { containsEnterprise } from '../utils/app';
 import { v4 as uuidv4 } from 'uuid';
 import { getWifiNetworks, getWifiProfile } from '../utils/win';
+import { logError } from '../utils/logError';
 
 
 const notConnected = 'You are not connected to any wifi network';
@@ -24,7 +25,9 @@ wifi.init({
 
 class WifiService {
   static async fetchConnectedWifi(): Promise<IPCResponse> {
+
     try {
+      
       const data: WifiConnectionData[] = await wifiConnections();
       const networks = (await networkInterfaces()) as NetworkInterfacesData[];
       const wifiInterface = networks.find(
@@ -60,6 +63,7 @@ class WifiService {
       };
     } catch (error) {
       console.log(error);
+      logError(error);
       return {
         status: 'error',
         message: notConnected,
@@ -81,6 +85,7 @@ class WifiService {
       };
     } catch (error) {
       console.log(error);
+      logError(error);
       return {
         status: 'error',
         message: 'Failed to fetch wifi networks',
@@ -89,7 +94,6 @@ class WifiService {
     }
   }
   static connectWifi(data: ConnectQuery): void {
-    console.log(data);
     const window = AppWindows.getMainWindow();
     if (!window) {
       return;
@@ -97,6 +101,7 @@ class WifiService {
     wifi.connect({ ssid: data.ssid, password: data.password }, (error) => {
       if (error) {
         console.log(error);
+        logError(error);
         window.webContents.send('connect-wifi-status', {
           status: 'error',
           message:
@@ -133,6 +138,7 @@ class WifiService {
       async (error): Promise<void> => {
         if (error) {
           console.log(error);
+          logError(error);
           window.webContents.send(saveImage, {
             status: 'error',
             message: failImageMessage,
@@ -147,6 +153,7 @@ class WifiService {
             unlink(data.ssid, (err) => {
               if (err) {
                 console.log(err);
+                logError(err);
               }
               window.webContents.send(saveImage, {
                 status: 'error',
@@ -159,6 +166,7 @@ class WifiService {
             rename(data.ssid, filePath, (err) => {
               if (err) {
                 console.log(err);
+                logError(err);
                 window.webContents.send(saveImage, {
                   status: 'error',
                   message: failImageMessage,
@@ -173,6 +181,7 @@ class WifiService {
           }
         } catch (error) {
           console.log(error);
+          logError(error);
           window.webContents.send(saveImage, {
             status: 'error',
             message: failImageMessage,
@@ -196,6 +205,7 @@ class WifiService {
       };
     } catch (error) {
       console.log(error);
+      logError(error);
       return {
         status: 'error',
         message: 'Failed to fetch stored wifi networks',

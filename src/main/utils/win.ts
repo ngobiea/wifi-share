@@ -1,6 +1,6 @@
 
 import { execa } from 'execa';
-
+import { logError } from './logError';
 import { v4 as uuidv4 } from 'uuid';
 
 let currentNetwork = '';
@@ -21,6 +21,7 @@ export const getWifiNetworks = async (): Promise<string[]> => {
     .catch((err) => {
       console.log('Error in getWifiNetworks');
       console.log(err);
+      logError(err);
       return [];
     });
 };
@@ -42,7 +43,8 @@ export const getWifiProfile = async (ssid: string): Promise<WifiProfile> => {
 
       return { ssid, password, security, id: uuidv4() };
     })
-    .catch(() => {
+    .catch((error) => {
+      logError(error);
       if (currentNetwork !== ssid) {
         currentNetwork = ssid + ' ';
         return getWifiProfile(ssid + ' ');

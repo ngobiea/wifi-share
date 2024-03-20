@@ -26,7 +26,7 @@ const appWindow = (): BrowserWindow | null => {
     autoHideMenuBar: true,
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
-      // devTools: false,
+      devTools: false,
     },
     title: 'Wifi Share',
   });
@@ -42,7 +42,7 @@ const appWindow = (): BrowserWindow | null => {
       return { action: 'deny' };
     });
 
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
