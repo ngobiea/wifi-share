@@ -1,5 +1,5 @@
 import { Card, List, ListItem, ListItemPrefix } from '@material-tailwind/react';
-import { MdOutlineFilePresent } from 'react-icons/md';
+import { MdOutlineFilePresent,MdInfoOutline } from 'react-icons/md';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { AiOutlineScan } from 'react-icons/ai';
 import { BsQrCodeScan } from 'react-icons/bs';
@@ -38,6 +38,11 @@ const SideBar: SideBar[] = [
     value: 'Stored Wi-Fi',
     icon: <FaWifi />,
   },
+  {
+    label: 'About',
+    value: 'About',
+    icon: <MdInfoOutline />,
+  }
 ];
 
 const Sidebar = (): JSX.Element => {

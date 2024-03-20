@@ -27,7 +27,7 @@ const config: ForgeConfig = {
       ProductName: 'WiFi Share',
       InternalName: 'WiFi Share',
     },
-    appVersion: '1.0.0',
+    appVersion: '1.0.0-beta.1',
     appCopyright: 'Augustine Ngobie @2024',
 
   },
@@ -45,7 +45,7 @@ const config: ForgeConfig = {
       title: 'WiFi Share',
       description: 'Share your WiFi with friends and family with ease',
       setupMsi: 'WiFi-Share-Setup.msi',
-      version: '1.0.0',
+      version: '1.0.0-beta.1',
       copyright: 'Augustine Ngobie',
     }),
     new MakerZIP({}, ['darwin']),
@@ -57,7 +57,6 @@ const config: ForgeConfig = {
     new WebpackPlugin({
       devContentSecurityPolicy:
         "script-src 'self' 'unsafe-eval' 'unsafe-inline' data:",
-
       mainConfig,
       renderer: {
         config: rendererConfig,

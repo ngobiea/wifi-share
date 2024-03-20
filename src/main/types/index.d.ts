@@ -32,6 +32,7 @@ interface WifiNetworkData {
   security: string[];
   wpaFlags: string[];
   rsnFlags: string[];
+  id; string;
 }
 
 interface WifiConnectionData {

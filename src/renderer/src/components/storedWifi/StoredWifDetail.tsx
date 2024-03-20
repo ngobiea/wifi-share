@@ -31,7 +31,7 @@ const StoredWifDetail = (): JSX.Element => {
     <Dialog
       open={currentStoredWifi !== null}
       handler={handleOpen}
-      className={`relative h-[27rem] pt-10 w-full max-w-[58rem]  justify-center m-auto overflow-hidden mt-10 text-center ${
+      className={`relative pt-10 w-full max-w-[58rem]  justify-center m-auto overflow-hidden mt-10 text-center ${
         isDarkMode ? ' bg-gray-800' : ''
       }`}
     >

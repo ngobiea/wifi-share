@@ -22,7 +22,7 @@ const ScannedWifi = (): JSX.Element => {
       </div>
       <List className={`${isDarkMode ? 'text-white' : ''}`}>
         {availableWifi.map((network) => {
-          return <ListItem key={network.bssid}>{network.ssid}</ListItem>;
+          return <ListItem key={network.id}>{network.ssid}</ListItem>;
         })}
       </List>
     </Drawer>

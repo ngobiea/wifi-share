@@ -11,11 +11,13 @@ import wifi from 'node-wifi-fixes';
 import AppWindows from '../windows/AppWindows';
 import { join } from 'path';
 import { containsEnterprise } from '../utils/app';
+import { v4 as uuidv4 } from 'uuid';
+import { getWifiNetworks, getWifiProfile } from '../utils/win';
+
 
 const notConnected = 'You are not connected to any wifi network';
 const saveImage = 'save-image-status';
 const failImageMessage = 'Failed to save QR code image';
-import { getWifiNetworks, getWifiProfile } from '../utils/win';
 wifi.init({
   iface: null,
 });
@@ -70,7 +72,12 @@ class WifiService {
       return {
         status: 'success',
         message: 'Wifi networks fetched successfully',
-        networks,
+        networks: networks.map((network) => { 
+          return {
+            ...network,
+            id: uuidv4(),
+          };
+        }) as WifiNetworkData[],
       };
     } catch (error) {
       console.log(error);

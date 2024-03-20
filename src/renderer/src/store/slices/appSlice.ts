@@ -27,6 +27,7 @@ const initialState: AppSliceState = {
   connectedNetwork: null,
   isShowQRScanner: false,
   isShowWrongCode: false,
+  isShowWelcome: false,
   password: '',
   isLoading: false,
   qrCode: '',
@@ -114,6 +115,9 @@ const appSlice = createSlice({
     toggleDarkMode: (state) => {
       state.isDarkMode = !state.isDarkMode;
     },
+    toggleWelcome: (state) => {
+      state.isShowWelcome = !state.isShowWelcome;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchConnectedWifi.fulfilled, fetchConnectedWifiFulfilled);
@@ -139,5 +143,6 @@ export const {
   setCurrentStoredWifi,
   setScanStatus,
   toggleDarkMode,
+  toggleWelcome,
 } = appSlice.actions;
 export const appReducer = appSlice.reducer;

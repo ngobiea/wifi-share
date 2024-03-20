@@ -22,7 +22,8 @@ type tab =
   | 'Wi-Fi Scan'
   | 'Create QR Image'
   | 'Open QR Image'
-  | 'Stored Wi-Fi';
+  | 'Stored Wi-Fi'
+  | 'About';
 
 interface AppNetwork {
   ssid: string;
@@ -53,8 +54,6 @@ interface Option {
   name: string;
 }
 
-
-
 interface AppSliceState {
   tab: tab;
   openSidenav: boolean;
@@ -65,6 +64,7 @@ interface AppSliceState {
   connectedNetwork: NetworkProperties | null;
   isShowQRScanner: boolean;
   isShowWrongCode: boolean;
+  isShowWelcome: boolean;
   password: string;
   isLoading: boolean;
   qrCode: string;
@@ -81,7 +81,7 @@ interface AppSliceState {
 
 interface AppContextProps {
   stream: MediaStream | null;
-  enableWebcam: () => Promise<void>;
+  enableWebcam: ({ deviceId: string }) => Promise<void>;
   disableWebcam: () => void;
 }
 
@@ -91,7 +91,5 @@ interface VideoDevice {
   label: string;
 }
 
-
 declare module '*.png';
 declare module '*.ico';
-

@@ -21,7 +21,7 @@ const QRScanner = (): JSX.Element => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { disableWebcam, enableWebcam, stream } = useAppContext();
-  const { isLoading, qrCode, webcamStatus, isDarkMode } = useAppSelector(
+  const { isLoading, qrCode, webcamStatus, isDarkMode,selectedVideoDevice } = useAppSelector(
     (state) => state.app
   );
   useEffect(() => {
@@ -112,7 +112,7 @@ const QRScanner = (): JSX.Element => {
           className='flex flex-col items-center gap-1 w-48'
           onClick={() => {
             if (videoRef.current?.srcObject === null) {
-              enableWebcam();
+              enableWebcam({deviceId: selectedVideoDevice?.deviceId});
             } else {
               disableWebcam();
             }

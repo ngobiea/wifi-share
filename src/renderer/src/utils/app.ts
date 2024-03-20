@@ -1,3 +1,5 @@
+
+
 export const parseWifiString = (wifiString: string): WifiDataType => {
   // Remove 'WIFI:' from the beginning of the string
   wifiString = wifiString.replace('WIFI:', '');
@@ -54,3 +56,5 @@ export const getPreferredColorScheme = () => {
     return 'light'; // fallback to light mode if the user's preference is not detected
   }
 };
+
+

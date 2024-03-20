@@ -11,11 +11,13 @@ import { getDevices } from './store/thunks/getDevices';
 import CodeForm from './components/createCode/CodeForm';
 import OpenImage from './components/openImage/OpenImage';
 import WrongCodeDialog from './components/scannedWifi/WrongCodeDialog';
-import { appStatus } from './utils/appStatus';
+import { appStatus,handleShowWelcome } from './utils/appStatus';
 import StoredWifi from './components/storedWifi/StoredWifi';
 import WifiDetail from './components/storedWifi/StoredWifDetail';
 import NavbarSimple from './components/app/AppNavbar';
 import Welcome from './components/app/Welcome';
+import About from './components/about/About';
+// import { handleShowWelcome } from './utils/app';
 appStatus();
 
 function App(): JSX.Element {
@@ -30,7 +32,8 @@ function App(): JSX.Element {
   }, [tab]);
   useEffect(() => {
     dispatch(getDevices());
-  
+    handleShowWelcome();
+    
   }, []);
   let content = <QRScanner />;
   if (tab === 'Open QR Image') {
@@ -43,6 +46,8 @@ function App(): JSX.Element {
     content = <QRScanner />;
   } else if (tab === 'Create QR Image') {
     content = <CodeForm />;
+  } else if (tab === 'About') {
+    content = <About />;
   }
 
   return (
