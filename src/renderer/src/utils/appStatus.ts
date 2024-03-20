@@ -27,7 +27,7 @@ export const handleShowWelcome = () => {
   }
   else{
     const currentCount = parseInt(count as string);
-    if (currentCount < 5) {
+    if (currentCount < 10) {
       localStorage.setItem('welcomeCount', (currentCount + 1).toString());
     } else {
       store.dispatch(toggleWelcome());
